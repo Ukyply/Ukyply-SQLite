@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- Page info -->
+<div class="page-info-section set-bg" data-setbg="{% static 'webuni/img/page-bg/2.jpg' %}">
+  <div class="container">
+    <div class="site-breadcrumb">
+      <a href="/">Ukyply</a>
+      <a href="/#Courses">Kategoriýalar</a>
+      <span>Kurs</span>
+    </div>
+  </div>
+</div>
+<!-- Page info end -->
+
+
+<!-- search section -->
+<section class="search-section ss-other-page">
+  <div class="container">
+    <div class="search-warp">
+      <div class="section-title text-white">
+        <h2><span>Gözle</span></h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <!-- search form -->
+          <form method="post" action="{% url 'courses:kerko_kurs' %}" class="intro-newslatter"> {% csrf_token %}
+            <input name="search" type="text" placeholder="Kurs Gözle">
+            <button type="submit" class="site-btn btn-dark">Kurs Gözle</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- search section end -->
+
+
+<!-- single course section -->
+<section class="single-course spad pb-0">
+  <div class="container">
+    <div class="course-meta-area">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+
+          <h3>{{course.Title|capfirst}}</h3>
+          <div class="course-metas">
+            <div class="course-meta">
+              <div class="course-author">
+                <h6>Kursun Mugallymy</h6>
+                <p>{{course.Creator|capfirst}}, <span> Mugallym</span></p>
+              </div>
+            </div>
+            <div class="course-meta">
+              <div class="cm-info">
+                <h6>Kategoriya</h6>
+                <p>{{ course.Category }}</p>
+              </div>
+            </div>
+            <div class="course-meta">
+              <div class="cm-info">
+                <h6>Düşündiriliş</h6>
+                <p>{{course.Description}}</p>
+              </div>
+            </div>
+            <div class="course-meta">
+              <div class="cm-info">
+                <h6>Sapaklaryn Sany</h6>
+                <p>{{ course.lessons|length }}</p>
+              </div>
+            </div>
+          </div>
+          <a href="javascript:history.back()" class="site-btn price-btn">Yza</a>
+          <a href="#Go" class="site-btn buy-btn">Öwrenmage Dowam Edin</a>
+        </div>
+      </div>
+    </div>
+    <img src="img/courses/single.jpg" alt="" class="course-preview">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1 course-list">
+        <div class="cl-item" id="lessons">
+          <h4>Kursun Sapaklary</h4>
+          {% if course.lessons != None  %}
+            {% for lesson in course.lessons %}
+            <div data-aos="fade-right" >
+              <h5 class="pb-3">Sapak {{lesson.Position}} <a id="Go" href="{{ lesson.get_absolute_url }}#video"><span class="pl-4">{{lesson.Title}}</span></a></h5>
+            </div>
+            {% endfor %}
+          {% endif %}
+          {% if course.lessons|length == 0 %}
+          <div class="alert alert-danger">Bu Kursda Entak Sapak Yok !</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

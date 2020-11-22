@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>Ukyply - Online Learning Platform</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Ukyply Online Learning System">
+	<meta name="keywords" content="Class , Learning , Ukyply , Online Learning">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="{% static 'webuni/img/Ukyply_Logo.png' %}" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'webuni/css/bootstrap.min.css'%}"/>
+	<link rel="stylesheet" href="{% static 'webuni/css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'webuni/css/owl.carousel.css' %}"/>
+	<link rel="stylesheet" href="{% static 'webuni/css/style.css'%}"/>
+	<link rel="stylesheet" href="{% static 'webuni/css/freelancer.css'%}"/>
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<nav class="navbar navbar-expand-lg bg-secondary text-uppercase" id="mainNav" style="padding:10px">
+		  <a class="navbar-brand js-scroll-trigger" href="/"><img src="{% static 'webuni/img/Ukyply_Full_Logo.png' %}" alt="" style="height:55px "></a>
+		  <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			Menu
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:home' %}">Baş Sahypa</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#Courses">Kurslar</a>
+				  </li>
+			  </li>
+			  {% if request.user.profile.is_teacher == True %}
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:create_category' %}">Kategoriýa Goş</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:create_course' %}">Kurs Goş</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:create_lesson' %}">Sapak Goş</a>
+			  </li>
+			  {% else %}
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:contact' %}">Habarlaşyň</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:about' %}">Biz Barada</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Blog</a>
+			  </li>
+			  {% endif %}
+			  {% if request.user.is_authenticated %}
+
+			  <div class="dropdown show">
+				<a class=" dropdown-toggle nav-link py-3 px-0 px-lg-3 rounded js-scroll-triggeraa" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{request.user.username}}
+				</a>
+
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				  <a class="dropdown-item" href="{% url 'users:profile' %}">Profil</a>
+				  <a class="dropdown-item" href="{% url 'account_logout' %}">Hasapdan <br> Çykmak</a>
+				</div>
+			  </div>
+			  {% else %}
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="active nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'account_login' %}">Giriş</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="active nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'account_signup' %}">Hasap Aç</a>
+			  </li>
+              {% endif %}
+			</ul>
+		  </div>
+	  </nav>
+
+{% include 'inc/messages.html' %}
+{% block content %}
+
+{% endblock content %}
+
+{% if request.user.is_authenticated %}
+{% else %}
+	<!-- banner section -->
+	<section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Ulgamymyza goşulyň!</h2>
+				<p>Videolar, mugallymlar we beýleki agzalar bilen aragatnaşyk arkaly onlaýn sapaklary öwreniň. Bu gaty ýönekeý, etmeli ýeke-täk zadyňyz hasaba alynmak. Aşakdaky düwmä basyň:</p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="{% url 'account_signup' %}" class="site-btn">Agza Bol</a>
+			</div>
+		</div>
+	</section>
+	<!-- banner section end -->
+{% endif %}
+
+
+	<!-- footer section -->
+	<footer class="footer-section spad pb-0">
+		<div class="footer-top">
+			<div class="footer-warp">
+				<div class="row text-center">
+					<div class="widget-item">
+
+					</div>
+					<div class="widget-item">
+						<h4>Gözleg</h4>
+						<ul>
+							<li><a href="/blog">Blog</a></li>
+							<li><a href="/about">Biz Barada</a></li>
+							<li><a href="/contact">Habarlaşyň</a></li>
+						</ul>
+					</div>
+					<div class="widget-item">
+						<h4 style="margin-bottom:0px">Aragatnaşykda Boluň</h4>
+						<ul class="contact-list">
+							<li>Türkmenistan <br>Aşgabat</li>
+							<li>+993 63 000000</li>
+							<li>support@ukyply.com</li>
+						</ul>
+					</div>
+					<div class="widget-item">
+						<h4>Kategoriyalar</h4>
+						<ul>
+							<li><a href="/courses/1">Matematika</a></li>
+							<li><a href="/courses/2">Biologiýa</a></li>
+							<li><a href="/courses/3">Fizika</a></li>
+							<li><a href="/courses/4">Himiýa</a></li>
+							<li><a href="/courses/5">Informatika</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<div class="footer-warp">
+				<div class="">
+	Awtorlyk hukugy &copy; Ukyply <script>document.write(new Date().getFullYear());</script> Ähli hukuklar goralandyr
+</div>
+<small>IT Meydança Bilen Bilelikde Işlenilendir</small>
+			</div>
+		</div>
+	</footer>
+	<!-- footer section end -->
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="{% static 'webuni/js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'webuni/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'webuni/js/mixitup.min.js' %}"></script>
+	<script src="{% static 'webuni/js/circle-progress.min.js' %}"></script>
+	<script src="{% static 'webuni/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'webuni/js/main.js' %}"></script>
+	<script src="{% static 'webuni/js/freelancer.js' %}"></script>
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</html>

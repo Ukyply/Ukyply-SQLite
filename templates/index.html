@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Hero section -->
+<section class="hero-section set-bg" data-setbg="{% static 'webuni/img/bg.jpg'%}" style="background-attachment:fixed">
+  <div class="container">
+    <div class="hero-text text-white" style="padding:200px 0 0">
+      {% if request.user.is_authenticated %}
+      <h2>Gaýtadan hoş geldiňiz {% if request.user.profile.is_teacher == True %}
+         Mugallym ,
+        {% endif %} {{ request.user.username|capfirst }}
+
+
+      </h2>
+      {% else %}
+      <h2>Onlaýn öwreniň - Okamagyň täze döwri</h2>
+      {% endif %}
+      <p>Ukyply , size gymmatlyk goşjak käbir zatlary öwrenmäge kömek edýän onlaýn okuw ulgamydyr.</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <form method="post" action="{% url 'courses:kerko_kurs' %}" class="intro-newslatter"> {% csrf_token %}
+          <input name="search" type="text" placeholder="Kurs Gözle">
+          <button type="submit" class="site-btn">Kurs Gözle</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Hero section end -->
+
+<!-- categories section -->
+<section class="categories-section spad">
+  <div class="container">
+    <div class="section-title">
+      <h2 id="Courses">Kategoriýalar</h2>
+      <p>Kategoriýaňyzy saýlaň .</p>
+    </div>
+    <div class="row">
+      {% for cat in category %}
+      <!-- categorie -->
+      <div data-aos="zoom-in" class="col-lg-4 col-md-6">
+        <div class="categorie-item">
+
+          <div class="ci-thumb set-bg" data-setbg="{{ cat.Image.url }}"></div>
+          <div class="ci-text" style="height:50px ; padding:15px">
+            <a href="/courses/{{ cat.id }}">
+
+            <h5>{{ cat.Title|capfirst }}</h5>
+            <!-- <p>{{ cat.Description|capfirst }}</p> -->
+            <!-- <span><a class="btn btn-success" href="/courses/{{ cat.id }}">Look At The Subjects</a></span> -->
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- categories section end -->
+
+
+{% endblock content %}

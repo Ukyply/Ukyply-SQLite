@@ -1,0 +1,17 @@
+{% if messages %}
+
+    {% for message in messages %}
+    <div class="alert m-0 alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+{% comment %}
+messages.debug(request, '%s SQL jümleleri ýerine ýetirildi.' % count)
+messages.info(request, 'Three credits remain in your account.')
+messages.success(request, 'Profil maglumatlary täzelendi.')
+messages.warning(request, 'Hasabyňyz üç günüň içinde gutarýar.')
+messages.error(request, 'Resminama öçürildi.')
+{% endcomment %}
