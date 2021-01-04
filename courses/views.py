@@ -51,7 +51,7 @@ class LessonDetailView(View,LoginRequiredMixin):
         return render(request, "courses/lesson_detail.html", context)
 
 
-@login_required
+# @login_required
 def SearchView(request):
     if request.method == 'POST':
         Search = request.POST.get('search')
