@@ -49,7 +49,7 @@
 					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#Courses">Kurslar</a>
 				  </li>
 			  </li>
-			  {% if request.user.profile.is_teacher == True %}
+<!-- 			  {% if request.user.profile.is_teacher == True %}
 			  <li class="nav-item mx-0 mx-lg-1">
 				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:create_category' %}">Kategoriýa Goş</a>
 			  </li>
@@ -89,7 +89,13 @@
 			  <li class="nav-item mx-0 mx-lg-1">
 				<a class="active nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'account_signup' %}">Hasap Aç</a>
 			  </li>
-              {% endif %}
+              {% endif %} -->
+			    <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:contact' %}">Habarlaşyň</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:about' %}">Biz Barada</a>
+			  </li>
 			</ul>
 		  </div>
 	  </nav>
@@ -99,7 +105,7 @@
 
 {% endblock content %}
 
-{% if request.user.is_authenticated %}
+<!-- {% if request.user.is_authenticated %}
 {% else %}
 	<!-- banner section -->
 	<section class="banner-section spad">
@@ -114,7 +120,7 @@
 		</div>
 	</section>
 	<!-- banner section end -->
-{% endif %}
+{% endif %} -->
 
 
 	<!-- footer section -->
